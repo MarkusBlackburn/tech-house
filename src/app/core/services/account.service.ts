@@ -114,7 +114,7 @@ export class AccountService {
     const authConfig: AuthConfig = {
       issuer: 'https://accounts.google.com',
       strictDiscoveryDocumentValidation: false,
-      redirectUri: 'http://localhost:5000/account/handler',
+      redirectUri: 'https://smarthome-team.store/account/handler',
       clientId: environment.clientId,
       scope: 'openid profile email',
     };
