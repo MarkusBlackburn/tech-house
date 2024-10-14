@@ -1,9 +1,13 @@
-import { Route, Routes } from "@angular/router";
-import { LoginComponent } from "./login/login.component";
+import { Routes } from "@angular/router";
 
 export const accountRoutes: Routes = [
     {
         path: 'login',
-        loadComponent: () => import('./login/login.component').then((mod) => mod.LoginComponent),
+        loadComponent: () => import('./login/login.component').then((mod) => mod.LoginComponent)
     },
+
+    {
+        path: 'handler',
+        loadComponent: () => import('./handler/handler.component').then((mod) => mod.HandlerComponent)
+    }
 ];

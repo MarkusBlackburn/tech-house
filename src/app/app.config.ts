@@ -6,7 +6,7 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { provideNgxWebstorage, withSessionStorage } from 'ngx-webstorage';
-import { SocialAuthServiceConfig, GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import { provideOAuthClient } from 'angular-oauth2-oidc'
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true }),
@@ -14,22 +14,23 @@ export const appConfig: ApplicationConfig = {
   provideClientHydration(),
   provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
   provideNgxWebstorage(withSessionStorage()),
-  {
-    provide: 'SocialAuthServiceConfig',
-    useValue: {
-      autoLogin: false,
-      providers: [
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(
-            '947828801124-8usg2d325e03v6ujig6rpjjtmcv32i1e.apps.googleusercontent.com'
-          )
-        },
-      ],
-      onError: (err) => {
-        console.error(err);
-      }
-    } as SocialAuthServiceConfig,
-  }
+  provideOAuthClient(),
+  // {
+  //   provide: 'SocialAuthServiceConfig',
+  //   useValue: {
+  //     autoLogin: false,
+  //     providers: [
+  //       {
+  //         id: GoogleLoginProvider.PROVIDER_ID,
+  //         provider: new GoogleLoginProvider(
+  //           '947828801124-8usg2d325e03v6ujig6rpjjtmcv32i1e.apps.googleusercontent.com'
+  //         )
+  //       },
+  //     ],
+  //     onError: (err) => {
+  //       console.error(err);
+  //     }
+  //   } as SocialAuthServiceConfig,
+  // }
   ]
 };
